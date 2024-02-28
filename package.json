@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon serve.js",
     "setup-dbs": "psql -f db/setup.sql",
     "seed": "node ./db/run-seed.js",
-    "test": "jest",
+    "test:seed": "jest seed.test.js",
+    "test:user-reg": "jest users-register.test.js",
+    "test": "npm run test:seed && npm run test:user-reg",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
@@ -14,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "pg": "^8.11.3",
@@ -22,6 +26,7 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "jest-sorted": "^1.0.15",
+    "nodemon": "^3.1.0",
     "standard": "^17.1.0",
     "supertest": "^6.3.4"
   }

@@ -1,7 +1,6 @@
 const { Pool } = require('pg')
 const path = require('path')
-
-const ENV = process.env.Node_ENV || 'development'
+const ENV = process.env.NODE_ENV || 'development'
 
 const envPath = path.join(__dirname, '..', `.env.${ENV}`)
 

@@ -1,6 +1,6 @@
 /* global describe, beforeAll, afterAll, test, expect */
 const db = require('../../db')
-const seed = require('../../db/seed') // Adjust the path as necessary
+const seed = require('../../db/seed')
 const data = require('../../db/data/test-data')
 
 beforeAll(() => seed(data))
