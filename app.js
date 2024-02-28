@@ -11,7 +11,6 @@ const { handleCustomErrors } = require('./error-handling/custom-error')
 app.use(express.json())
 
 app.post('/api/users/register', postUser)
-
 app.use(handleCustomErrors)
 app.use(handlePsqlError)
 

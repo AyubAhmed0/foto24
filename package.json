@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon serve.js",
+    "start": "nodemon app.js",
     "setup-dbs": "psql -f db/setup.sql",
     "seed": "node ./db/run-seed.js",
     "test:seed": "jest seed.test.js",
     "test:user-reg": "jest users-register.test.js",
-    "test": "npm run test:seed && npm run test:user-reg",
+    "test": "npm run test:seed && npm run test:user-reg utils.test.js",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
@@ -20,6 +20,7 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
     "pg-format": "^1.0.4"
   },
