@@ -9,7 +9,7 @@ beforeAll(() => seed(data))
 afterAll(() => db.end())
 
 describe('POST /api/users/register', () => {
-  it('should register a new user with a unique username and valid password', async () => {
+  it('should register a new user with a unique username and valid password', () => {
     const testUser = {
       username: 'newuser12345',
       password: 'password123'
@@ -24,7 +24,7 @@ describe('POST /api/users/register', () => {
       })
   })
 
-  it('should not register a user with a password shorter than 8 characters', async () => {
+  it('should not register a user with a password shorter than 8 characters', () => {
     return request(app)
       .post('/api/users/register')
       .send({

@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon server.js",
     "setup-dbs": "psql -f db/setup.sql",
     "seed": "node ./db/run-seed.js",
     "test:seed": "jest seed.test.js",
     "test:user-reg": "jest users-register.test.js",
-    "test": "npm run test:seed && npm run test:user-reg utils.test.js",
+    "test:utils": "jest utils.test.js",
+    "test:user-login": "jest users-login.test.js",
+    "test": "npm run test:seed && npm run test:user-reg && npm run test:utils && npm run test:user-login",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
