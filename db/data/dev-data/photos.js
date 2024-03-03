@@ -10,13 +10,13 @@ module.exports = [
     description: 'The hustle and bustle of the city at noon.'
   },
   {
-    userId: 4,
-    url: 'https://fotofable.s3.amazonaws.com/uploads/photo_002.jpg',
+    userId: 2,
+    url: 'https://fotofable.s3.amazonaws.com/uploads/photo_003.jpg',
     description: 'The hustle and bustle of the city at noon.'
   },
   {
     userId: 1,
-    url: 'https://fotofable.s3.amazonaws.com/uploads/photo_002.jpg',
+    url: 'https://fotofable.s3.amazonaws.com/uploads/photo_004.jpg',
     description: 'The hustle and bustle of the city at noon.'
   }
 ]
