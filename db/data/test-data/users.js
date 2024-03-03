@@ -1,10 +1,10 @@
 module.exports = [
   {
-    username: 'john_doe',
-    passwordHash: 'password123'
+    username: 'rose',
+    passwordHash: '$2b$10$gNudQfwFSc8KPZ2NwG/PX./FnabfdSqeww2JGpVpBAGdkJqfMHsVC'
   },
   {
     username: 'lee',
-    passwordHash: 'lee1236'
+    passwordHash: '$2b$10$u51WUvdH.Jpw3JEancz4uujZBSS0wiKUYWKrOtaeu4XEReKp0iHvm'
   }
 ]
