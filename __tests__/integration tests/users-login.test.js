@@ -1,11 +1,8 @@
-/* global describe, beforeAll, afterAll, it, expect */
+/* global describe, afterAll, it, expect */
 const request = require('supertest')
 const app = require('../../app')
 const db = require('../../db')
-const seed = require('../../db/seed')
-const data = require('../../db/data/test-data')
 
-beforeAll(() => seed(data))
 afterAll(() => db.end())
 
 describe('POST /api/users/login', () => {

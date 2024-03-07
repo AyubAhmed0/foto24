@@ -12,7 +12,7 @@ function findUserByUsername (req, res, next) {
             return res.status(401).json({ msg: 'Incorrect login credentials' })
           }
           // Password matches, generate token
-          const token = generateToken({ userId: user.user_id, username: user.username })
+          const token = generateToken({ userId: user.userId, username: user.username })
           res.status(200).send({ user, token })
         })
     })
