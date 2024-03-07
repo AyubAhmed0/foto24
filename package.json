@@ -11,7 +11,9 @@
     "test:user-reg": "jest users-register.test.js",
     "test:utils": "jest utils.test.js",
     "test:user-login": "jest users-login.test.js",
-    "test": "npm run test:seed && npm run test:user-reg && npm run test:utils && npm run test:user-login",
+    "test:auth-middleware": "jest auth-middleware.test.js",
+    "test:photos-upload": "jest photos-upload.test.js",
+    "test": "npm run test:seed && npm run test:user-reg && npm run test:utils && npm run test:user-login && npm run test:photos-upload && npm run test:auth-middleware",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
@@ -23,6 +25,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.11.3",
     "pg-format": "^1.0.4"
   },

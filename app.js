@@ -2,20 +2,28 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
-const {
-  postUser
-} = require('./controllers/users/register')
-const {
-  findUserByUsername
-} = require('./controllers/users/login')
-const { handlePsqlError } = require('./error-handling/PSQL-error')
-const { handleCustomErrors } = require('./error-handling/custom-error')
+// Require controllers and middleware
+const { postUser } = require('./controllers/users/register')
+const { findUserByUsername } = require('./controllers/users/login')
+const { postPhoto } = require('./controllers/photos/uploads')
+const { verifyToken } = require('./middleware/auth-middleware')
 
-app.use(express.json())
+// Require the configured Multer instance
+const upload = require('./config/multerConfig')
 
+// Error handling
+const { handlePsqlErrors } = require('./error-handling/PSQL-errors')
+const { handleCustomErrors } = require('./error-handling/custom-errors')
+const { handleMulterErrors } = require('./error-handling/multer-errors')
+
+// Routes
 app.post('/api/users/register', postUser)
 app.post('/api/users/login', findUserByUsername)
+app.post('/api/photos/upload', verifyToken, upload.single('photo'), postPhoto)
+
+// Error handlers
+app.use(handlePsqlErrors)
 app.use(handleCustomErrors)
-app.use(handlePsqlError)
+app.use(handleMulterErrors)
 
 module.exports = app

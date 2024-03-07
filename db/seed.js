@@ -21,7 +21,7 @@ const seed = async ({ userData, photoData }) => {
 
   await db.query(
     format(
-      'INSERT INTO photos (user_id, url, description) VALUES %L RETURNING *',
+      'INSERT INTO photos ("userId", url, description) VALUES %L RETURNING *',
       formattedPhotos
     )
   )
