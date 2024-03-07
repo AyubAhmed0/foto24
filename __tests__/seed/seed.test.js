@@ -22,19 +22,19 @@ describe('seed', () => {
           expect(exists).toBe(true)
         })
     })
-    test('users table has user_id column as serial primary key', () => {
+    test('users table has userId column as serial primary key', () => {
       return db
         .query(
           `SELECT column_name, data_type, column_default
                     FROM information_schema.columns
                     WHERE table_name = 'users'
-                    AND column_name = 'user_id';`
+                    AND column_name = 'userId';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe('user_id')
+          expect(column.column_name).toBe('userId')
           expect(column.data_type).toBe('integer')
           expect(column.column_default).toBe(
-            "nextval('users_user_id_seq'::regclass)"
+            "nextval('\"users_userId_seq\"'::regclass)"
           )
         })
     })
@@ -118,16 +118,16 @@ describe('seed', () => {
           )
         })
     })
-    test('photos table has user_id column as integer', () => {
+    test('photos table has userId column as integer', () => {
       return db
         .query(
           `SELECT column_name, data_type
                         FROM information_schema.columns
                         WHERE table_name = 'photos'
-                        AND column_name = 'user_id';`
+                        AND column_name = 'userId';`
         )
         .then(({ rows: [column] }) => {
-          expect(column.column_name).toBe('user_id')
+          expect(column.column_name).toBe('userId')
           expect(column.data_type).toBe('integer')
         })
     })
@@ -186,7 +186,7 @@ describe('seed', () => {
       return db.query('SELECT * FROM users;').then(({ rows: users }) => {
         expect(users).toHaveLength(2)
         users.forEach((user) => {
-          expect(user).toHaveProperty('user_id')
+          expect(user).toHaveProperty('userId')
           expect(user).toHaveProperty('username')
           expect(user).toHaveProperty('password_hash')
           expect(user).toHaveProperty('created_at')
@@ -199,7 +199,7 @@ describe('seed', () => {
         expect(photos).toHaveLength(2)
         photos.forEach((photo) => {
           expect(photo).toHaveProperty('photo_id')
-          expect(photo).toHaveProperty('user_id')
+          expect(photo).toHaveProperty('userId')
           expect(photo).toHaveProperty('url')
           expect(photo).toHaveProperty('description')
           expect(photo).toHaveProperty('created_at')
