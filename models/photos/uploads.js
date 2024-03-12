@@ -1,7 +1,7 @@
 const db = require('../../db')
 
-function insertPhoto ({ userId, filePath, description }) {
-  if (userId === undefined || filePath === undefined || description === undefined) {
+function insertPhoto ({ userId, fileUrl, description }) {
+  if (userId === undefined || fileUrl === undefined || description === undefined) {
     // eslint-disable-next-line prefer-promise-reject-errors
     return Promise.reject({ status: 400, msg: 'Bad request' })
   }
@@ -10,7 +10,7 @@ function insertPhoto ({ userId, filePath, description }) {
     VALUES ($1, $2, $3)
     RETURNING *;
 `
-  const values = [userId, filePath, description]
+  const values = [userId, fileUrl, description]
 
   return db.query(query, values)
 }
