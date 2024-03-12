@@ -7,7 +7,6 @@ const path = require('path')
 afterAll(() => db.end())
 
 describe('POST /api/photos/upload', () => {
-  
   // The following test have been commented out because it uploads photos to S3, incurring costs.
 
   // it('should upload a photo successfully', async () => {
