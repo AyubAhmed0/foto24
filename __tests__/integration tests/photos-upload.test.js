@@ -7,53 +7,58 @@ const path = require('path')
 afterAll(() => db.end())
 
 describe('POST /api/photos/upload', () => {
-  it('should upload a photo successfully', async () => {
-    // login a valid user to get token
-    const loginResponse = await request(app)
-      .post('/api/users/login')
-      .send({ username: 'rose', password: 'rose12345' })
-      .expect(200)
+  
+  // The following test have been commented out because it uploads photos to S3, incurring costs.
 
-    // extract token from login response
-    const token = loginResponse.body.token
+  // it('should upload a photo successfully', async () => {
+  //   // login a valid user to get token
+  //   const loginResponse = await request(app)
+  //     .post('/api/users/login')
+  //     .send({ username: 'rose', password: 'rose12345' })
+  //     .expect(200)
 
-    // Now use the token for the photo upload test
-    return request(app)
-      .post('/api/photos/upload')
-      .set('Authorization', `Bearer ${token}`)
-      .attach(
-        'photo',
-        path.resolve(__dirname, '..', '..', 'uploads', '1709579286632.jpg')
-      )
-      .field('description', 'A test photo')
-      .expect(201)
-      .then((response) => {
-        expect(response.body).toHaveProperty(
-          'msg',
-          'Photo uploaded successfully'
-        )
-      })
-  })
+  //   // extract token from login response
+  //   const token = loginResponse.body.token
 
-  it('successfully inserts photo data into the database', async () => {
-    // fetch the user to get the userId
-    const userRes = await db.query('SELECT * FROM users WHERE username = $1', [
-      'rose'
-    ])
-    expect(userRes.rows.length).toBeGreaterThan(0) // Making sure the user exists
-    const userId = userRes.rows[0].userId
+  //   // Now use the token for the photo upload test
+  //   return request(app)
+  //     .post('/api/photos/upload')
+  //     .set('Authorization', `Bearer ${token}`)
+  //     .attach(
+  //       'photo',
+  //       path.resolve(__dirname, '..', '..', 'uploads', '1709579286632.jpg')
+  //     )
+  //     .field('description', 'A test photo')
+  //     .expect(201)
+  //     .then((response) => {
+  //       expect(response.body).toHaveProperty(
+  //         'msg',
+  //         'Photo uploaded successfully'
+  //       )
+  //     })
+  // })
 
-    // fetch the most recently uploaded photo by this userId
-    const photoRes = await db.query(
-      'SELECT * FROM photos WHERE "userId" = $1 ORDER BY created_at DESC LIMIT 1',
-      [userId]
-    )
+  // The following test have been commented out because it depends on the above commented test.
 
-    expect(photoRes.rows.length).toBe(1) // a photo was found
-    const uploadedPhoto = photoRes.rows[0]
-    expect(uploadedPhoto.description).toBe('A test photo')
-    expect(uploadedPhoto.userId).toBe(userId)
-  })
+  // it('successfully inserts photo data into the database', async () => {
+  //   // fetch the user to get the userId
+  //   const userRes = await db.query('SELECT * FROM users WHERE username = $1', [
+  //     'rose'
+  //   ])
+  //   expect(userRes.rows.length).toBeGreaterThan(0) // Making sure the user exists
+  //   const userId = userRes.rows[0].userId
+
+  //   // fetch the most recently uploaded photo by this userId
+  //   const photoRes = await db.query(
+  //     'SELECT * FROM photos WHERE "userId" = $1 ORDER BY created_at DESC LIMIT 1',
+  //     [userId]
+  //   )
+
+  //   expect(photoRes.rows.length).toBe(1) // a photo was found
+  //   const uploadedPhoto = photoRes.rows[0]
+  //   expect(uploadedPhoto.description).toBe('A test photo')
+  //   expect(uploadedPhoto.userId).toBe(userId)
+  // })
 
   it('rejects photo upload without a token', () => {
     return request(app)
