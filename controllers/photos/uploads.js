@@ -2,7 +2,7 @@ const { insertPhoto } = require('../../models/photos/uploads')
 
 function postPhoto (req, res, next) {
   if (!req.file) {
-    return res.status(400).json({ msg: 'Photo upload is required' })
+    return res.status(400).send({ msg: 'Photo upload is required' })
   }
 
   const fileUrl = req.file.location
@@ -11,7 +11,7 @@ function postPhoto (req, res, next) {
 
   insertPhoto({ userId, fileUrl, description })
     .then(() => {
-      res.status(201).json({ msg: 'Photo uploaded successfully' })
+      res.status(201).send({ msg: 'Photo uploaded successfully' })
     })
     .catch(next)
 }
