@@ -15,11 +15,13 @@ const upload = require('./config/multerConfig')
 const { handlePsqlErrors } = require('./error-handling/PSQL-errors')
 const { handleCustomErrors } = require('./error-handling/custom-errors')
 const { handleMulterErrors } = require('./error-handling/multer-errors')
+const { getGallery } = require('./controllers/photos/gallery')
 
 // Routes
 app.post('/api/users/register', postUser)
 app.post('/api/users/login', findUserByUsername)
 app.post('/api/photos/upload', verifyToken, upload.single('photo'), postPhoto)
+app.get('/api/photos/gallery', verifyToken, getGallery)
 
 // Error handlers
 app.use(handlePsqlErrors)
